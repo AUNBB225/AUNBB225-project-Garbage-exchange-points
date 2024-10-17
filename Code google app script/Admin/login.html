@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- SweetAlert2 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.all.min.js"></script>
+  <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+      background-color: #e8f5e9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    .login-title {
+      color: #2e7d32;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .form-control:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+    }
+    .btn-login {
+      background-color: #4caf50;
+      border-color: #4caf50;
+    }
+    .btn-login:hover {
+      background-color: #45a049;
+      border-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="login-container">
+          <h2 class="login-title"><i class="bi bi-leaf-fill me-2"></i>เข้าสู่ระบบAdmin</h2>
+          <form id="loginForm">
+            <div class="mb-3">
+              <label for="username" class="form-label">ชื่อผู้ใช้:</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                <input type="text" class="form-control" id="username" name="username" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">รหัสผ่าน:</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-login btn-lg text-white">เข้าสู่ระบบ</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <?var url = getUrl();?>
+  <script>
+    document.getElementById("loginForm").onsubmit = async function(e) {
+      e.preventDefault(); 
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      google.script.run.withSuccessHandler(handleLoginResponse).checkLogin(username, password);
+    };
+
+    function handleLoginResponse(result) {
+      if (result === "success") {
+        Swal.fire({
+          icon: 'success',
+          title: 'เข้าสู่ระบบสำเร็จ',
+          text: 'กำลังนำคุณไปยังหน้าหลัก...',
+          timer: 2000,
+          showConfirmButton: false
+        }).then(() => {
+          google.script.run.withSuccessHandler(function(url) {
+            window.location.href = `${url}?page=home`;
+          }).getUrl();
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'เข้าสู่ระบบไม่สำเร็จ',
+          text: 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
+          confirmButtonColor: '#4caf50'
+        });
+      }
+    }
+  </script>
+</body>
+</html>
