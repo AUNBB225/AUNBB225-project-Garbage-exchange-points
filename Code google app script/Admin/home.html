@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_top">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Striking Eco-friendly Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Itim&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+Thai:wght@100..900&display=swap');
+        
+        *{
+            font-family: "Noto Sans Thai", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: <weight>;
+            font-style: normal;
+            font-variation-settings:"wdth" 100;
+        }
+        body {
+            background-color: #f0f7f4;
+            color: #1e3a2b;
+        }
+        .navbar {
+            background-color: #2ecc71;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-weight: 600;
+        }
+        .btn-eco {
+            background-color: #27ae60;
+            border-color: #27ae60;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-eco:hover {
+            background-color: #219653;
+            border-color: #219653;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .card-header {
+            background-color: #2ecc71;
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            font-weight: 600;
+        }
+        .card-body {
+            background-color: white;
+        }
+        .card-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #27ae60;
+        }
+        .stats-icon {
+            font-size: 3rem;
+            color: #27ae60;
+        }
+        .page-title {
+            color: #27ae60;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="bi bi-leaf-fill me-2"></i>EcoApp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <?var url = getUrl();?>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=url?>?page=productManagement"><i class="bi bi-box-seam me-1"></i>จัดการรายการสินค้า</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=url?>?page=requestManagement"><i class="bi bi-arrow-left-right me-1"></i>จัดการคำสั่งขอแลก</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=url?>?page=settings"><i class="bi bi-gear-fill me-2"></i>ตั้งค่าอัตราแลกเปลี่ยน</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-5 page-title">Eco-friendly Dashboard</h1>
+    
+    <div class="row justify-content-center">
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-header">
+                    <i class="bi bi-people-fill me-2"></i>ผู้ใช้ทั้งหมด
+                </div>
+                <div class="card-body">
+                    <i class="bi bi-person-circle stats-icon mb-3"></i>
+                    <h5 class="card-title" id="userCount"></h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-header">
+                    <i class="bi bi-recycle me-2"></i>อัตราการแลกเปลี่ยน
+                </div>
+                <div class="card-body">
+                    <i class="bi bi-arrow-left-right stats-icon mb-3"></i>
+                    <h5 class="card-title"><span id="exchangeRate"></span> คะแนน/ขวด</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-header">
+                    <i class="bi bi-bell-fill me-2"></i>คำขอรออนุมัติ
+                </div>
+                <div class="card-body">
+                    <i class="bi bi-envelope-exclamation stats-icon mb-3"></i>
+                    <h5 class="card-title" id="requestCount"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 text-center">
+        <?var url = getUrl();?>
+<button class="btn btn-eco btn-lg me-3 mb-3" onclick="window.location.href='<?=url?>?page=settings'">
+    <i class="bi bi-gear-fill me-2"></i>ตั้งค่าอัตราแลกเปลี่ยน
+</button>
+
+        <button class="btn btn-eco btn-lg me-3 mb-3" onclick="window.location.href='<?=url?>?page=requestManagement'">
+            <i class="bi bi-list-check me-2"></i>จัดการคำสั่งขอแลก
+        </button>
+        <button class="btn btn-eco btn-lg mb-3" onclick="window.location.href='<?=url?>?page=productManagement'">
+            <i class="bi bi-box-seam me-1"></i>จัดการรายการสินค้า
+        </button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    async function fetchUserData() {
+        try {
+            const data = await google.script.run.withSuccessHandler(updateUserData).getUserData();
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'เกิดข้อผิดพลาด',
+                text: 'ไม่สามารถโหลดข้อมูลได้ กรุณาลองใหม่อีกครั้ง',
+                confirmButtonColor: '#27ae60'
+            });
+        }
+    }
+
+    function updateUserData(data) {
+        document.getElementById("userCount").innerText = data.userCount || '0';
+        document.getElementById("exchangeRate").innerText = data.scoreSetting || '0';
+        document.getElementById("requestCount").innerText = data.requestCount || '0';
+
+        if (data.requestCount > 0) {
+            Swal.fire({
+                icon: 'info',
+                title: 'คำขอใหม่!',
+                text: `คุณมี ${data.requestCount} คำขอที่รอการดำเนินการ`,
+                confirmButtonText: 'ตกลง',
+                confirmButtonColor: '#27ae60'
+            });
+        }
+    }
+
+    window.onload = fetchUserData;
+</script>
+
+</body>
+</html>
