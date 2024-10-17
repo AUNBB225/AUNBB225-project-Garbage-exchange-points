@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Friendly Shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+
+            @import url('https://fonts.googleapis.com/css2?family=Itim&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+Thai:wght@100..900&display=swap');
+        
+        *{
+            font-family: "Noto Sans Thai", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: <weight>;
+            font-style: normal;
+            font-variation-settings:"wdth" 100;
+        }
+    :root {
+      --primary-color: #4CAF50;
+      --secondary-color: #45a049;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f7f0;
+      padding-top: 56px; /* Add padding to body to account for fixed navbar */
+    }
+    .navbar {
+      background-color: var(--primary-color);
+    }
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+      border-color: var(--secondary-color);
+    }
+    .card {
+      border: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+      height: 100%; /* Ensure all cards have the same height */
+    }
+    .card-img-top {
+      height: 150px; /* Set a fixed height for images */
+      object-fit: cover; /* Ensure images cover the area without stretching */
+    }
+    .card-body {
+      padding: 0.75rem; /* Reduce padding for smaller screens */
+    }
+    .card-title {
+      font-size: 1rem; /* Smaller font size for titles */
+    }
+    .card-text {
+      font-size: 0.875rem; /* Smaller font size for text */
+    }
+    .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+    }
+    @media (min-width: 768px) {
+      .card-img-top {
+        height: 200px; /* Larger image height for bigger screens */
+      }
+      .card-body {
+        padding: 1.25rem; /* Increase padding for larger screens */
+      }
+      .card-title {
+        font-size: 1.25rem; /* Larger font size for titles on bigger screens */
+      }
+      .card-text {
+        font-size: 1rem; /* Larger font size for text on bigger screens */
+      }
+      .btn-sm {
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+      }
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .user-info {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .fixed-point {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="bi bi-leaf-fill me-2"></i>Eco-Friendly Shop</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="viewOrdersBtn">รายการแลก</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="logoutBtn">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="fixedPoint" class="fixed-point d-none">
+    <strong>Point: </strong><span id="userPoints"></span>
+  </div>
+
+  <div class="container mt-5">
+    <div id="loginForm" class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Login</h2>
+            <form id="loginFormElement">
+              <div class="mb-3">
+                <input type="text" class="form-control" id="username" placeholder="Username" required>
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control" id="phone" placeholder="Phone" required>
+              </div>
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Login</button>
+<button type="button" class="btn btn-outline-primary" onclick="window.location.href='https://script.google.com/macros/s/AKfycbz6Uq5Au-9Oc1si-sp7JEpJq_lk8z6w3_Po6mikl_Af4YX6W6KLoQKV4HttNbprvR6t/exec'">Create Account</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="userData" class="row justify-content-center mt-5 d-none">
+      <div class="col-md-8">
+        <div class="user-info">
+          <h2 class="text-center mb-4">ข้อมูลผู้ใช้</h2>
+          <div id="userInfoContent"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="products" class="row mt-5 d-none">
+      <h2 class="text-center mb-4">รายการของ</h2>
+      <div id="productList" class="row"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    let userId, userName, userPhone;
+
+    document.getElementById('loginFormElement').addEventListener('submit', function(e) {
+      e.preventDefault();
+      login();
+    });
+
+    function login() {
+      const username = document.getElementById('username').value;
+      const phone = document.getElementById('phone').value;
+      
+      Swal.fire({
+        title: 'Logging in...',
+        text: 'Please wait',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
+      google.script.run.withSuccessHandler(handleLogin).withFailureHandler(handleLoginError).checkLogin(username, phone);
+    }
+    
+    function handleLogin(user) {
+      Swal.close();
+      if (user) {
+        userId = user[0];
+        userName = user[1];
+        userPhone = user[2];
+        document.getElementById('loginForm').classList.add('d-none');
+        displayUserInfo(user);
+        fetchProducts();
+        document.querySelector('.navbar').classList.remove('d-none');
+        document.getElementById('fixedPoint').classList.remove('d-none');
+        Swal.fire({
+          icon: 'success',
+          title: 'Login Successful',
+          text: 'Welcome back!',
+          timer: 1500,
+          showConfirmButton: false
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: 'Please check your username and phone.',
+        });
+      }
+    }
+
+    function handleLoginError(error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Error',
+        text: 'An error occurred while logging in. Please try again.',
+      });
+    }
+    
+    function displayUserInfo(user) {
+      const userInfoContent = document.getElementById('userInfoContent');
+      userInfoContent.innerHTML = `
+        <p><i class="bi bi-person-badge me-2"></i><strong>User ID:</strong> ${user[0]}</p>
+        <p><i class="bi bi-person-circle me-2"></i><strong>UserName:</strong> ${user[1]}</p>
+        <p><i class="bi bi-telephone-fill me-2"></i><strong>Phone:</strong> ${user[2]}</p>
+        <p><i class="bi bi-hash me-2"></i><strong>Line token ID:</strong> ${user[3]}</p>
+        <p><i class="bi bi-recycle me-2"></i><strong>จำนวนขวด:</strong> ${user[4]}</p>
+      `;
+      document.getElementById('userData').classList.remove('d-none');
+      document.getElementById('userPoints').textContent = user[5];
+    }
+
+    function fetchProducts() {
+      google.script.run.withSuccessHandler(displayProducts).getProducts();
+    }
+
+    function displayProducts(products) {
+      const productList = document.getElementById('productList');
+      productList.innerHTML = '';
+      for (let i = 1; i < products.length; i++) {
+        const product = products[i];
+        const productDiv = document.createElement('div');
+        productDiv.className = 'col-6 mb-3'; // 2 columns on all screen sizes, reduced bottom margin
+        productDiv.innerHTML = `
+          <div class="card h-100">
+            <img src="${product[3]}" class="card-img-top" alt="${product[1]}">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">${product[1]}</h5>
+              <p class="card-text flex-grow-1">${product[2]}</p>
+              <p class="card-text"><strong>ราคา:</strong> ${product[0]} Point</p>
+              <button class="btn btn-primary btn-sm w-100 mt-auto" onclick="purchaseProduct(${product[0]}, '${product[1]}', '${product[2]}')">
+                <i class="bi bi-cart-plus me-1"></i>ซื้อ
+              </button>
+            </div>
+          </div>
+        `;
+        productList.appendChild(productDiv);
+      }
+      document.getElementById('products').classList.remove('d-none');
+    }
+
+    function purchaseProduct(price, productName, productDetails) {
+      const userPoints = parseInt(document.getElementById('userPoints').textContent);
+      if (userPoints >= price) {
+        Swal.fire({
+          title: 'ยืนยันการซื้อสินค้า',
+          text: `คุณต้องการซื้อ "${productName}" ในราคา ${price} Point ใช่หรือไม่?`,
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'ยืนยัน',
+          cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const newPoints = userPoints - price;
+            google.script.run.updateUserPoints(userId, newPoints);
+            google.script.run.recordOrder(userId, userName, userPhone, price, productName, productDetails);
+            document.getElementById('userPoints').textContent = newPoints;
+            Swal.fire('สำเร็จ!', `คุณได้ซื้อสินค้า "${productName}" แล้ว`, 'success');
+          }
+        });
+      } else {
+        Swal.fire('ไม่สามารถซื้อได้', 'คะแนนของคุณไม่เพียงพอสำหรับการซื้อสินค้า', 'error');
+      }
+    }
+
+    function fetchOrders() {
+      Swal.fire({
+        title: 'กำลังโหลดรายการคำสั่งซื้อ',
+        text: 'กรุณารอสักครู่...',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        }
+      });
+      google.script.run.withSuccessHandler(displayOrders).withFailureHandler(handleOrdersError).getUserOrders(userId);
+    }
+
+    function displayOrders(orders) {
+      Swal.close();
+      let orderHtml = '<div class="list-group">';
+      orders.forEach(order => {
+        orderHtml += `
+          <div class="list-group-item">
+            <h5 class="mb-1">${order.order[4]}</h5>
+            <p class="mb-1">ราคา: ${order.order[3]} Point</p>
+            <p class="mb-1">รายละเอียด: ${order.order[5]}</p>
+            <button class="btn btn-danger btn-sm mt-2" onclick="cancelOrder(${order.row})">
+              <i class="bi bi-x-circle me-2"></i>ยกเลิกคำสั่งซื้อ
+            </button>
+          </div>
+        `;
+      });
+      orderHtml += '</div>';
+
+      Swal.fire({
+        title: 'รายการคำสั่งซื้อ',
+        html: orderHtml,
+        width: 600,
+        showCloseButton: true,
+        showConfirmButton: false
+      });
+    }
+
+    function handleOrdersError(error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'An error occurred while fetching orders. Please try again.',
+      });
+    }
+
+    function cancelOrder(orderRow) {
+      Swal.fire({
+        title: 'ยืนยันการยกเลิก',
+        text: "คุณแน่ใจว่าจะยกเลิกคำสั่งซื้อนี้?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยัน',
+        cancelButtonText: 'ยกเลิก'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          google.script.run.withSuccessHandler(updatePointsAfterCancel).cancelOrder(orderRow);
+        }
+      });
+    }
+
+    function updatePointsAfterCancel(newPoints) {
+      document.getElementById('userPoints').textContent = newPoints;
+      Swal.fire('สำเร็จ', 'คำสั่งซื้อถูกยกเลิกแล้ว', 'success');
+      fetchOrders();
+    }
+
+    function openSignUp() {
+      Swal.fire('Coming Soon', 'ฟีเจอร์นี้กำลังอยู่ในระหว่างการพัฒนา', 'info');
+    }
+
+    document.getElementById('viewOrdersBtn').addEventListener('click', fetchOrders);
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      Swal.fire({
+        title: 'ยืนยันการออกจากระบบ',
+        text: "คุณต้องการออกจากระบบใช่หรือไม่?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'ใช่',
+        cancelButtonText: 'ไม่'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          location.reload();
+        }
+      });
+    });
+
+    document.querySelector('.navbar').classList.add('d-none');
+  </script>
+</body>
+</html>
