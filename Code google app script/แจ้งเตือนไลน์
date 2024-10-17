@@ -1,0 +1,188 @@
+const CHANNEL_ACCESS_TOKEN = 'SsTW2jDJLAn5+Q1M7IDw2N+JM5bgaw2JkvE16stLI9972Fz58OPnaRrEmDiZSGzWJHr6Y49qRvmxGSx4wnBtfHm68fA2aAeAqlFhk9RY8kLQrSJ31ivZ6JvVQkGWb/9Wq/xcTcv8rn0clhkKjdLuagdB04t89/1O/w1cDnyilFU='; // แทนที่ด้วย Access Token ของคุณ
+function doGet(e) {
+  if (!e || !e.parameter) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "Failed",
+      message: "No parameters provided"
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var phoneNumber = e.parameter.phoneNumber;
+  var objectCount = e.parameter.objectCount;
+  var lineToken = e.parameter.lineToken;
+  var points = parseFloat(e.parameter.points).toFixed(2);
+  var bottleCount = e.parameter.bottleCount;
+  var organizationName = "ชื่อหน่วยงาน"; // แทนที่ด้วยชื่อหน่วยงานของคุณ
+
+  if (!lineToken) {
+    return ContentService.createTextOutput(JSON.stringify({status: "Failed", message: "Missing Line token"}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // สร้าง Flex Message
+  var flexMessage = {
+    type: "flex",
+    altText: "ข้อมูลการบันทึก",
+    contents: {
+      type: "bubble",
+      header: {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: organizationName,
+            weight: "bold",
+            size: "lg",
+            color: "#1DB446" // สีของชื่อหน่วยงาน
+          }
+        ]
+      },
+      body: {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: "ข้อมูลการบันทึก",
+            weight: "bold",
+            size: "md"
+          },
+          {
+            type: "separator",
+            margin: "lg"
+          },
+          {
+            type: "box",
+            layout: "vertical",
+            margin: "lg",
+            spacing: "sm",
+            contents: [
+              {
+                type: "box",
+                layout: "horizontal",
+                contents: [
+                  {
+                    type: "text",
+                    text: "หมายเลขโทรศัพท์:",
+                    color: "#aaaaaa",
+                    size: "sm",
+                    flex: 0
+                  },
+                  {
+                    type: "text",
+                    text: phoneNumber,
+                    wrap: true,
+                    color: "#666666",
+                    align: "center",
+                    size: "sm",
+                     margin: "xl"
+                  }
+                ]
+              },
+              {
+                type: "box",
+                layout: "horizontal",
+                contents: [
+                  {
+                    type: "text",
+                    text: "จำนวนขวดใหม่ที่บันทึก:",
+                    color: "#aaaaaa",
+                    size: "sm",
+                    flex: 0
+                  },
+                  {
+                    type: "text",
+                    text: objectCount,
+                    wrap: true,
+                    color: "#666666",
+                    align: "center",
+                    size: "sm",
+                    margin: "xl"
+                  }
+                ]
+              },
+              {
+                type: "box",
+                layout: "horizontal",
+                contents: [
+                  {
+                    type: "text",
+                    text: "ขวดทั้งหมด:",
+                    color: "#aaaaaa",
+                    size: "sm",
+                    flex: 0
+                  },
+                  {
+                    type: "text",
+                    text: bottleCount,
+                    wrap: true,
+                    color: "#666666",
+                    align: "center",
+                    size: "sm",
+                    margin: "xl"
+                  }
+                ]
+              },
+              {
+                type: "box",
+                layout: "horizontal",
+                contents: [
+                  {
+                    type: "text",
+                    text: "คะแนนรวม:",
+                    color: "#aaaaaa",
+                    size: "sm",
+                    flex: 0
+                  },
+                  {
+                    type: "text",
+                    text: points,
+                    wrap: true,
+                    color: "#666666",
+                    align: "center",
+                    size: "sm",
+                    margin: "xl"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  };
+
+  var payload = {
+    to: lineToken,
+    messages: [flexMessage]
+  };
+
+  var options = {
+    method: "post",
+    contentType: "application/json",
+    headers: {
+      "Authorization": `Bearer ${CHANNEL_ACCESS_TOKEN}`
+    },
+    payload: JSON.stringify(payload)
+  };
+
+  try {
+    var response = UrlFetchApp.fetch("https://api.line.me/v2/bot/message/push", options);
+    var responseCode = response.getResponseCode();
+    var responseBody = response.getContentText();
+    Logger.log("LINE API Response Code: " + responseCode);
+    Logger.log("LINE API Response Body: " + responseBody);
+
+    return ContentService.createTextOutput(JSON.stringify({
+      status: responseCode === 200 ? "success" : "failed",
+      message: responseBody
+    })).setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    Logger.log("Error: " + error.toString());
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
