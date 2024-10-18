@@ -21,7 +21,7 @@ function getUrl(){
 
 
 function checkLogin(username, password) {
-  const sheetId = '1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc'; // ID ของ Google Sheet
+  const sheetId = 'YOUR_SHEETID'; // ID ของ Google Sheet
   const sheetName = 'Admin'; // ชื่อของ Sheet
   const sheet = SpreadsheetApp.openById(sheetId).getSheetByName(sheetName);
   
@@ -42,7 +42,7 @@ function checkLogin(username, password) {
 
 
 function getUserData() {
-  const dataSheetId = '1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc'; // ID ของ Google Sheet
+  const dataSheetId = 'YOUR_SHEETID'; // ID ของ Google Sheet
   const dataSheet = SpreadsheetApp.openById(dataSheetId).getSheetByName('DATA');
   const settingsSheet = SpreadsheetApp.openById(dataSheetId).getSheetByName('ตั้งค่าคะแนนการแลก');
   const exchangeSheet = SpreadsheetApp.openById(dataSheetId).getSheetByName('คำสั่งขอแลก');
@@ -64,7 +64,7 @@ function getUserData() {
 }
 
 function saveSettings(exchangeRate) {
-  const sheet = SpreadsheetApp.openById('1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc').getSheetByName('ตั้งค่าคะแนนการแลก');
+  const sheet = SpreadsheetApp.openById('YOUR_SHEETID').getSheetByName('ตั้งค่าคะแนนการแลก');
   
   // ตั้งค่าคะแนนการแลกใน A2
   sheet.getRange('A2').setValue(exchangeRate);
@@ -76,22 +76,22 @@ function saveSettings(exchangeRate) {
 }
 
 function getRequests() {
-  const sheet = SpreadsheetApp.openById('1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc').getSheetByName('คำสั่งขอแลก');
+  const sheet = SpreadsheetApp.openById('YOUR_SHEETID').getSheetByName('คำสั่งขอแลก');
   const data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 6).getValues();
   return data;
 }
 
 function deleteRequestRow(row) {
-  const sheet = SpreadsheetApp.openById('1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc').getSheetByName('คำสั่งขอแลก');
+  const sheet = SpreadsheetApp.openById('YOUR_SHEETID').getSheetByName('คำสั่งขอแลก');
   sheet.deleteRow(row);
 }
 
 //จัดการสินค้า-------------------------------------------------------------------------
 // กำหนด ID ของ Google Drive Folder ที่ใช้เก็บภาพ
-const FOLDER_ID = '1Y_OwWoYirTPuRT_mqwjnLsLuOCEvWRsn';
+const FOLDER_ID = 'YOUR_FolderID';
 
 // กำหนด ID ของ Google Sheet
-const SPREADSHEET_ID = '1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc';
+const SPREADSHEET_ID = 'YOUR_SHEETID';
 
 // ฟังก์ชันดึงข้อมูลสินค้า
 function getProducts() {
