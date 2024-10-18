@@ -1,5 +1,5 @@
 // กำหนด Spreadsheet ID และชื่อ Sheet
-const SPREADSHEET_ID = '1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc';
+const SPREADSHEET_ID = 'YOUR_SHEETID';
 const SHEET_NAME = 'DATA';
 
 // ฟังก์ชันสำหรับแสดงหน้าเว็บ
