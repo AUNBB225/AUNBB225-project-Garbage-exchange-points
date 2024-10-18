@@ -2,10 +2,12 @@ function doGet(e) {
   var phoneNumber = e.parameter.phoneNumber;
   var objectCount = Number(e.parameter.objectCount);
 
-  var sheet = SpreadsheetApp.openById("1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc").getSheetByName("DATA");
+//ID ของ google sheet ที่สร้างขึ้น
+  var sheet = SpreadsheetApp.openById("YOUR_SHEET ID").getSheetByName("DATA");
+
   var data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 7).getValues();
     // ดึงค่า multiplier จากแผ่นตั้งค่าคะแนนการแลก
-  var settingsSheet = SpreadsheetApp.openById("1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc").getSheetByName("ตั้งค่าคะแนนการแลก");
+  var settingsSheet = SpreadsheetApp.openById("YOUR_SHEET ID").getSheetByName("ตั้งค่าคะแนนการแลก");
   var multiplier = settingsSheet.getRange("A2").getValue();
 
   var foundRow = -1;
@@ -45,7 +47,7 @@ function doGet(e) {
     message = "Not PhoneNumber";
   }
 
-  var logSheet = SpreadsheetApp.openById("1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc").getSheetByName("ประวัติการบันทึก");
+  var logSheet = SpreadsheetApp.openById("YOUR_SHEET ID").getSheetByName("ประวัติการบันทึก");
   logSheet.appendRow([
     new Date(),
     phoneNumber,
@@ -57,7 +59,8 @@ function doGet(e) {
 }
 
 function sendTestData(phoneNumber, objectCount, lineToken, points, bottleCount) {
-  var url = "https://script.google.com/macros/s/AKfycbxY3I3uioldPAHxB1qgFJfm2w0ljwUci1-HvMx1b9VH_6lDc6Uqknf8wSEpGT0SW2M-/exec";
+//URLของ google app script แจ้งเตือนไลน์
+  var url = "YOUR_URLแจ้งเตือนไลน์";
 
   // กำหนดค่าพารามิเตอร์ที่ต้องการส่ง
   var params = {
