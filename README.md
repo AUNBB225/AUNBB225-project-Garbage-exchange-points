@@ -33,6 +33,8 @@
    ```
 
 #### 🖼️ ภาพแสดงวิธีการลง Board
+##### ติดตั้ง Driver ESP32:
+   [📥 ดาวน์โหลด Driver](https://www.silabs.com/documents/public/software/CP210x_VCP_Windows.zip)
 
 1. เปิดโปรแกรม Arduino IDE และไปที่ `File > Preferences`
    
@@ -48,8 +50,7 @@
    
    ![วิธีการตั้งค่า 4](https://lh5.googleusercontent.com/d/1ex2jNtq3jqOUSi5o02vkh2Jvj0IO_Rji)
 
-6. ติดตั้ง Driver ESP32:
-   [📥 ดาวน์โหลด Driver](https://www.silabs.com/documents/public/software/CP210x_VCP_Windows.zip)
+
 
 ### 2. ติดตั้ง Libraries ที่จำเป็น
 
