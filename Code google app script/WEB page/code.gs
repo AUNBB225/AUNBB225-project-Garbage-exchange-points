@@ -7,7 +7,7 @@ function doGet() {
 }
 
 function getData() {
-  const sheetId = '1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc';
+  const sheetId = 'YOUR_SHEETID';
   const sheet = SpreadsheetApp.openById(sheetId).getSheetByName('DATA');
   const data = sheet.getDataRange().getValues();
   return data; // ส่งกลับข้อมูลทั้งหมดใน Sheet
@@ -25,7 +25,7 @@ function checkLogin(username, phone) {
 
 
 function getProducts() {
-  const sheetId = '1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc';
+  const sheetId = 'YOUR_SHEETID';
   const sheet = SpreadsheetApp.openById(sheetId).getSheetByName('รายการของ');
   const data = sheet.getDataRange().getValues();
   return data; // ส่งกลับข้อมูลสินค้า
@@ -33,7 +33,7 @@ function getProducts() {
 
 
 function updateUserPoints(userId, newPoints) {
-  const sheetId = '1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc';
+  const sheetId = 'YOUR_SHEETID';
   const sheet = SpreadsheetApp.openById(sheetId).getSheetByName('DATA');
   const data = sheet.getDataRange().getValues();
   
@@ -47,7 +47,7 @@ function updateUserPoints(userId, newPoints) {
 
 
 function recordOrder(userId, username, phone, price, productName, productDetails) {
-  const sheetId = '1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc';
+  const sheetId = 'YOUR_SHEETID';
   const sheet = SpreadsheetApp.openById(sheetId).getSheetByName('คำสั่งขอแลก');
   
   // เพิ่ม "'" ไปด้านหน้าค่าที่จะบันทึก
@@ -65,7 +65,7 @@ function recordOrder(userId, username, phone, price, productName, productDetails
 }
 
 function getUserOrders(userId) {
-  const sheetId = '1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc';
+  const sheetId = 'YOUR_SHEETID';
   const sheet = SpreadsheetApp.openById(sheetId).getSheetByName('คำสั่งขอแลก');
   const data = sheet.getDataRange().getValues();
   const userOrders = [];
@@ -80,7 +80,7 @@ function getUserOrders(userId) {
 
 
 function cancelOrder(orderRow) {
-  const sheetId = '1BRuELs-LdLADbX4_d-DU4QbCxFU0GLVTrqAr57bX5dc';
+  const sheetId = 'YOUR_SHEETID';
   const sheet = SpreadsheetApp.openById(sheetId).getSheetByName('คำสั่งขอแลก');
   
   const orderDetails = sheet.getRange(orderRow, 1, 1, 6).getValues()[0]; // ดึงข้อมูลคำสั่งซื้อ
