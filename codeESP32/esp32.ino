@@ -7,8 +7,8 @@
 
 
 
-// URL ของ Google App Script
-const String url = "https://script.google.com/macros/s/AKfycbwiyqkPUL8s3nYZU0U-2iB3X3hsuauadrhWGF24ipgSHPK8SE-o1NBAWV_yQd78revO9g/exec";
+// URL ของ Google App Script ที่ชื่อว่า API
+const String url = "YOUR_URL";
 
 LiquidCrystal_I2C lcd(0x27,16,2);
 int buzzer = 23;
